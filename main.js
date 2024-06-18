@@ -33,22 +33,22 @@ function playGame() {
     /* Create fun to play one round */
     function playRound(computerChoice=getComputerChoice(), humanChoice=getHumanChoice()) {
         if (humanChoice === computerChoice) {
-            console.log(`you are tied, with "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" as selection.`)
+            console.log(`you are tied for the round with "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" as selection.`)
         }
         else if (humanChoice === "rock" && computerChoice !== "scissors"){
-            console.log(`you lose! "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" beats "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}".`);
+            console.log(`you lose the round! "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" beats "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}".`);
             computerScore++;
         }
         else if (humanChoice === "paper" && computerChoice !== "rock") {
-            console.log(`you lose! "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" beats "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}".`);
+            console.log(`you lose the round! "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" beats "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}".`);
             computerScore++;
         }
         else if (humanChoice === "scissors" && computerChoice !== "paper") {
-            console.log(`you lose! "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" beats "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}".`);
+            console.log(`you lose the round! "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}" beats "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}".`);
             computerScore++;
         }
         else {
-            console.log(`you win!! "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}" beats "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}".`);
+            console.log(`you win the round!! "${humanChoice[0].toUpperCase()+humanChoice.slice(1)}" beats "${computerChoice[0].toUpperCase()+computerChoice.slice(1)}".`);
             humanScore++;
         }
     }
@@ -60,9 +60,9 @@ function playGame() {
 
     function declareWinner() {
         /* Declare winner of the overall Game */
-    humanScore > computerScore ? console.log(`You win!! \nyou have won the game with your score "${humanScore}", against "${computerScore}".`)
-    : humanScore === computerScore ? console.log(`you are tied with score of "${humanScore}".`)
-    :console.log(`You Lose!! \nyou have lost the game with your score "${humanScore}", against "${computerScore}".`);
+    humanScore > computerScore ? console.log(`You win!! \nYou have won the game with your score "${humanScore}", against "${computerScore}".`)
+    : humanScore === computerScore ? console.log(` Game over! \nYou are tied with score of "${humanScore}".`)
+    :console.log(`You Lose!! \nYou have lost the game with your score "${humanScore}", against "${computerScore}".`);
     }
     declareWinner();
 }
