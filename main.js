@@ -24,6 +24,7 @@ function getHumanChoice() {
 
 /* Play 5 rounds */
 function playGame() {
+    console.clear();
     
     /* Create variables to store scores */
     let humanScore = 0;
@@ -77,5 +78,5 @@ function playGame() {
     }
     declareWinner();
 }
-
-playGame();
+const play = document.querySelector(".play");
+play.addEventListener("click", playGame);
