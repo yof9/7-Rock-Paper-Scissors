@@ -14,7 +14,7 @@ function getComputerChoice() {
 
 /* Create fun to play one round */
 function playRound(humanChoice, computerChoice=getComputerChoice()) {
-    console.log(roundsPlayed, "a", computerChoice[0])        
+
     roundsPlayed++;
     let text;
     if (humanChoice === computerChoice) {
@@ -38,23 +38,28 @@ function playRound(humanChoice, computerChoice=getComputerChoice()) {
         humanScore++;
     }
 
-    // Display round winner in output
+    // Create "li" with text display of winner
     let roundResult = document.createElement("li")
     roundResult.textContent= text
     roundResult.style = "margin-top: 30px;"
+    
+    // Append "li" in output
     document.querySelector(".output").appendChild(roundResult);
 
+    // Update score
     document.querySelector(".score").textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieFlag}`;
     
 }
 
+/* Declare winner of the overall Game */
 function declareWinner() {
-    /* Declare winner of the overall Game */
+    // Create text to display  
     let text = humanScore > computerScore ? 
     `You win!! \nYou have won the game with your score "${humanScore}", against "${computerScore}" with "${tieFlag}" ties.`: 
     humanScore === computerScore ? ` Game over! \nYou tied with score of "${humanScore}".`:
     `You Lose!! \nYou have lost the game with your score "${humanScore}", against "${computerScore}" with "${tieFlag}" ties.`;
     
+    //Reset output display of round winner-text to winner-declaration text
     let output = document.querySelector(".output");
     output.textContent = text;
     output.style.fontSize = "40px";
@@ -65,6 +70,7 @@ function declareWinner() {
     tieFlag = 0;
     roundsPlayed = 0;
 
+    // Set timerFlag to false so "click" event can be handled 
     setTimeout(() => {
         timerFlag = false;
     },1000);
@@ -73,16 +79,23 @@ function declareWinner() {
 
 /* Play 5 rounds */
 function playGame(e) {
+
+    // If timer is set don't handle "click" event
     if (timerFlag) return;
+
+    // If first game set output-text to empty, and readjust style
     if (roundsPlayed === 0) {
         let output = document.querySelector(".output");
         output.textContent = "";
         output.style.fontSize = "20px";
     }
+
+    // Play one round
     playRound(e.target.textContent);
 
     // If a clear winner declare
     if (roundsPlayed===5 || humanScore === 3 || computerScore === 3 || (tieFlag === 2 && (humanScore === 2 || computerScore === 2))) {
+        // To account for display timeout for last(5th) round and winner-display, set timerFlag 
         timerFlag= setTimeout(declareWinner, 1000);        
     }
 }
@@ -99,12 +112,13 @@ for (let i = 0; i < 3; i++) {
         div.style = "display: flex; background: grey";   
     }
     
-    // Create each btn and append to container
+    // Create btn and append to container
     btns[i] = document.createElement("button");
     btns[i].textContent = options[i];
     btns[i].style = `flex: 1 1 50%; color: #eeeeee; background-color: rgb(${50*(1+i)}, ${75*i}, ${100*i}); height: 50px; border-radius: 30px; margin: 30px;`;
     div.appendChild(btns[i]);
 }
+
 // Append button container
 document.body.appendChild(div);
 
@@ -119,7 +133,7 @@ document.body.appendChild(output);
 let humanScore = 0;
 let computerScore = 0;
 
-/* Declare variables to be used as test to prematurely end game if necessary */ 
+/* Declare variables to be used as test to end game if necessary */ 
 let tieFlag = 0;
 let roundsPlayed = 0;
 
@@ -130,8 +144,10 @@ score.textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieF
 score.style = "background-color: red; font-size: 22px; font-family: areial, flex: 0 0 0; width: 330px;";
 document.body.insertBefore(score, output);
 
+// At start there is no timer
 let timerFlag = false;
-// Listen 
+
+// Listen to 'click' and handle by capturing at parent(div) 
 div.addEventListener("click", playGame, {capture:true});
 
 
