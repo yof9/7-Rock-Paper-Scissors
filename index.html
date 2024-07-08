@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * > body {
+            background-color:aquamarine;
+            text-align: center;
+            flex: 1 1 0;
+        }
+        div > body {
+            display: flex;
+            background-color: white;
+            color: black;
+            
+        }
+    </style>
     <script src="./main.js" defer></script>
+
 </head>
-<body>
-    <label for=".play">Click the button to play a game in console(developers only!!):</label>
-    <input type="submit" class="play" value="Play a new game"> 
+<body style="display: flex; flex-direction: column;">
+    <h1>Rock-<span style="color:aliceblue;">Paper</span>-<span style="color:red;">Scissors</h1>
 </body>
 </html>
