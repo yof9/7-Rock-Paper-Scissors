@@ -65,10 +65,15 @@ function declareWinner() {
     tieFlag = 0;
     roundsPlayed = 0;
 
+    setTimeout(() => {
+        timerFlag = false;
+    },1000);
+
 }
 
 /* Play 5 rounds */
 function playGame(e) {
+    if (timerFlag) return;
     if (roundsPlayed === 0) {
         let output = document.querySelector(".output");
         output.textContent = "";
@@ -78,8 +83,7 @@ function playGame(e) {
 
     // If a clear winner declare
     if (roundsPlayed===5 || humanScore === 3 || computerScore === 3 || (tieFlag === 2 && (humanScore === 2 || computerScore === 2))) {
-        
-        declareWinner();
+        timerFlag= setTimeout(declareWinner, 1000);        
     }
 }
 
@@ -126,6 +130,7 @@ score.textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieF
 score.style = "background-color: red; font-size: 22px; font-family: areial, flex: 0 0 0; width: 330px;";
 document.body.insertBefore(score, output);
 
+let timerFlag = false;
 // Listen 
 div.addEventListener("click", playGame, {capture:true});
 
