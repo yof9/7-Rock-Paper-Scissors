@@ -1,4 +1,11 @@
 /* Get cptr choice */
+function styleBtn(e) {
+    e.target.style.color = "black"; 
+    e.target.style.backgroundColor= "#dbdb14";
+    e.target.style.width = Number(e.target.style.width.slice(0, -2)) + 10 + "px";
+    e.target.style.height = Number(e.target.style.height.slice(0, -2)) + 5 + "px";
+    e.target.style.border = Number(e.target.style.borderRadius.slice(0, -2)) + 3 + "px";
+}
 function getComputerChoice() {
     const randomNumber = Math.floor(Math.random() * 3);
     if (randomNumber === 0) {
@@ -47,7 +54,7 @@ function playRound(humanChoice, computerChoice=getComputerChoice()) {
     document.querySelector(".output").appendChild(roundResult);
 
     // Update score
-    document.querySelector(".score").textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieFlag}`;
+    document.querySelector(".score").textContent = `Wins: ${humanScore}  Lostylees: ${computerScore}  Ties: ${tieFlag}`;
     
 }
 
@@ -62,6 +69,7 @@ function declareWinner() {
     //Reset output display of round winner-text to winner-declaration text
     let output = document.querySelector(".output");
     output.textContent = text;
+    output.style.color= 'purple';
     output.style.fontSize = "40px";
 
     //Reset variables
@@ -88,6 +96,7 @@ function playGame(e) {
         let output = document.querySelector(".output");
         output.textContent = "";
         output.style.fontSize = "20px";
+        output.style.color = "black";
     }
 
     // Play one round
@@ -103,6 +112,7 @@ function playGame(e) {
 const btns = [];
 const options = ['rock', 'paper', 'scissors'];
 let div;
+let styleBank = []
 for (let i = 0; i < 3; i++) {
     // Create container
     if (i === 0) {
@@ -115,8 +125,14 @@ for (let i = 0; i < 3; i++) {
     // Create btn and append to container
     btns[i] = document.createElement("button");
     btns[i].textContent = options[i];
-    btns[i].style = `flex: 1 1 50%; color: #eeeeee; background-color: rgb(${50*(1+i)}, ${75*i}, ${100*i}); height: 50px; border-radius: 30px; margin: 30px;`;
+    let myColor = `rgb(${50*(1+i)}, ${75*i}, ${100*i})`;
+    styleBank[i] = `flex: 1 1 50%; color: #eeeeee; background-color: ${myColor}; height: 50px; border-radius: 30px; margin: 30px;`;    
+    btns[i].style = styleBank[i]
     div.appendChild(btns[i]);
+
+    // Hover styling
+    btns[i].addEventListener("mouseenter", styleBtn);
+    btns[i].addEventListener("mouseout", (e) => e.target.style = styleBank[i]);
 }
 
 // Append button container
@@ -133,15 +149,16 @@ document.body.appendChild(output);
 let humanScore = 0;
 let computerScore = 0;
 
-/* Declare variables to be used as test to end game if necessary */ 
+/* Declare variables to be used as test to end game if necestyleary */ 
 let tieFlag = 0;
 let roundsPlayed = 0;
 
 //create score display
 let score = document.createElement("div");
 score.setAttribute("class", "score");
-score.textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieFlag}`;
-score.style = "background-color: red; font-size: 22px; font-family: areial, flex: 0 0 0; width: 330px;";
+score.textContent = `Wins: ${humanScore}  Lostylees: ${computerScore}  Ties: ${tieFlag}`;
+score.style = "background-color: black; color: white; font-size: 22px; font-family: areial, flex: 0 0 0; width: 330px; height: 50px; margin: 30px auto;display;flex; flex-direction: column; align-content: center";
+
 document.body.insertBefore(score, output);
 
 // At start there is no timer
@@ -149,5 +166,3 @@ let timerFlag = false;
 
 // Listen to 'click' and handle by capturing at parent(div) 
 div.addEventListener("click", playGame, {capture:true});
-
-
