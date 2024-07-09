@@ -54,7 +54,7 @@ function playRound(humanChoice, computerChoice=getComputerChoice()) {
     document.querySelector(".output").appendChild(roundResult);
 
     // Update score
-    document.querySelector(".score").textContent = `Wins: ${humanScore}  Lostylees: ${computerScore}  Ties: ${tieFlag}`;
+    document.querySelector(".score").textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieFlag}`;
     
 }
 
@@ -156,7 +156,7 @@ let roundsPlayed = 0;
 //create score display
 let score = document.createElement("div");
 score.setAttribute("class", "score");
-score.textContent = `Wins: ${humanScore}  Lostylees: ${computerScore}  Ties: ${tieFlag}`;
+score.textContent = `Wins: ${humanScore}  Losses: ${computerScore}  Ties: ${tieFlag}`;
 score.style = "background-color: black; color: white; font-size: 22px; font-family: areial, flex: 0 0 0; width: 330px; height: 50px; margin: 30px auto;display;flex; flex-direction: column; align-content: center";
 
 document.body.insertBefore(score, output);
